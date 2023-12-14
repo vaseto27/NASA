@@ -15,22 +15,13 @@ describe("Launches API", () => {
   describe("Test GET /launches", () => {
     test("It should respond with 200 success", async () => {
       const response = await request(app)
-        .get("/launches")
+        .get("/v1/launches")
         .expect("Content-type", /json/)
         .expect(200);
     });
   });
 
   describe("Test POST /lauch", () => {
-
-    // flightNumber: 100,
-    // mission: "Kepler X",
-    // rocket: "Explorer IX 1",
-    // launchDate: new Date("December 27, 2030"),
-    // target: "Kepler-442 b",
-    // customer: ["ZTM", "NASA"],
-    // upcoming: true,
-    // success: true,
     const completeLaunchData = {
       mission: "Kepler X",
       rocket: "Explorer IX 1",
@@ -53,7 +44,7 @@ describe("Launches API", () => {
 
     test("It should respond with 201 success", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(completeLaunchData)
         .expect("Content-type", /json/)
         .expect(201);
@@ -66,7 +57,7 @@ describe("Launches API", () => {
 
     test("It should catch missing required properties", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(laucnhDataWithoutTheDate)
         .expect("Content-type", /json/)
         .expect(400);
@@ -78,7 +69,7 @@ describe("Launches API", () => {
 
     test("It should catch invalid dates", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(launcDataWithInvalidDate)
         .expect("Content-type", /json/)
         .expect(400);

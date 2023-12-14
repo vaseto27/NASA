@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MONGO_URL = 'mongodb+srv://vaseto27:lQOv7zERBsSHZnXJ@nasa.iqjpl24.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URL = process.env.MONGO_URL;
 
 
 mongoose.connection.once("open", () => {
